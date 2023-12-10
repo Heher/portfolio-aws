@@ -9,3 +9,5 @@ node_modules
 .sst
 
 *.pem
+
+.DS_Store
