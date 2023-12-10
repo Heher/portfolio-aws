@@ -1,0 +1,57 @@
+fragment CityOlympiad on Olympiad {
+  id
+  year
+  olympiadType
+}
+
+fragment CityFields on City {
+  id
+  name
+  slug
+  firstOlympiad
+  country {
+    name
+    flagByTimestamp(dateTimestamp: { start: { value: $now, inclusive: true }, end: { value: $now, inclusive: true } }) {
+      png
+    }
+  }
+  olympiads(orderBy: YEAR_ASC, condition: { realOlympiad: true }) {
+    nodes {
+      ...CityOlympiad
+    }
+  }
+}
+
+fragment OlympiadFieldsCity on City {
+  id
+  name
+  slug
+  country {
+    name
+    flagByTimestamp(dateTimestamp: { start: { value: $now, inclusive: true }, end: { value: $now, inclusive: true } }) {
+      png
+    }
+  }
+}
+
+fragment OlympiadFields on Olympiad {
+  id
+  year
+  olympiadType
+  city {
+    ...OlympiadFieldsCity
+  }
+}
+
+query GetOlympicData($now: Datetime!) {
+  olympiads(orderBy: YEAR_ASC) {
+    nodes {
+      ...OlympiadFields
+    }
+  }
+  cities {
+    nodes {
+      ...CityFields
+    }
+  }
+}

@@ -1,0 +1,11 @@
+query GetCity($slug: String!, $now: Datetime!) {
+  cityBySlug(slug: $slug) {
+    ...CityFields
+  }
+}
+
+query GetCityName($slug: String!) {
+  cityBySlug(slug: $slug) {
+    name
+  }
+}
