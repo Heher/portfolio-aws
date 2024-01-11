@@ -13,7 +13,8 @@ function Website({ stack, app }: StackContext) {
       domainName: stage === 'prod' ? 'www.johnheher.com' : `${stage}.johnheher.com`,
       domainAlias: stage === 'prod' ? 'johnheher.com' : undefined,
       hostedZone: 'johnheher.com'
-    }
+    },
+    warm: 20
   });
 
   stack.addOutputs({
