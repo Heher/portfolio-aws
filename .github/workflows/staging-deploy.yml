@@ -22,26 +22,26 @@ jobs:
           version: latest
           run_install: true
 
-      - name: Create deployment
-        uses: bobheadxi/deployments@v1
-        id: deployment
-        with:
-          step: start
-          token: ${{ secrets.GITHUB_TOKEN }}
-          env: staging
+      # - name: Create deployment
+      #   uses: bobheadxi/deployments@v1
+      #   id: deployment
+      #   with:
+      #     step: start
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     env: staging
 
-      - name: List build directory contents
-        run: ls public
+      # - name: List build directory contents
+      #   run: ls public
 
-      - name: Deploy to Netlify
+      - name: Deploy to AWS
         run: pnpm run deploy:staging
 
-      - name: Update deployment status
-        uses: bobheadxi/deployments@v1
-        if: always()
-        with:
-          step: finish
-          token: ${{ secrets.GITHUB_TOKEN }}
-          status: ${{ job.status }}
-          env: ${{ steps.deployment.outputs.env }}
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      # - name: Update deployment status
+      #   uses: bobheadxi/deployments@v1
+      #   if: always()
+      #   with:
+      #     step: finish
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     status: ${{ job.status }}
+      #     env: ${{ steps.deployment.outputs.env }}
+      #     deployment_id: ${{ steps.deployment.outputs.deployment_id }}
