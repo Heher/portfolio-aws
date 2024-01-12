@@ -14,6 +14,9 @@ dependencies:
   '@react-three/postprocessing':
     specifier: ^2.15.11
     version: 2.15.11(@react-three/fiber@8.15.12)(@types/three@0.159.0)(react@18.2.0)(three@0.159.0)
+  '@react-three/xr':
+    specifier: ^5.7.1
+    version: 5.7.1(@react-three/fiber@8.15.12)(react@18.2.0)(three@0.159.0)
   '@remix-run/css-bundle':
     specifier: ^2.3.1
     version: 2.3.1
@@ -3991,6 +3994,21 @@ packages:
       three-stdlib: 2.28.7(three@0.159.0)
     transitivePeerDependencies:
       - '@types/three'
+    dev: false
+
+  /@react-three/xr@5.7.1(@react-three/fiber@8.15.12)(react@18.2.0)(three@0.159.0):
+    resolution: {integrity: sha512-GaRUSA+lE8VJF/NrXq7QQByZ4UGHbQQ4rs3QCphZs9fVidK86hGrMOQ0kL79gZc5pa3V5uFGlOhNcUdsTYE3Bg==}
+    peerDependencies:
+      '@react-three/fiber': '>=8.0.0'
+      react: '>=18.0'
+      three: '>=0.141'
+    dependencies:
+      '@react-three/fiber': 8.15.12(react-dom@18.2.0)(react@18.2.0)(three@0.159.0)
+      '@types/webxr': 0.5.10
+      react: 18.2.0
+      three: 0.159.0
+      three-stdlib: 2.28.7(three@0.159.0)
+      zustand: 3.7.2(react@18.2.0)
     dev: false
 
   /@remix-run/css-bundle@2.3.1:
