@@ -10,11 +10,14 @@ import { motion } from 'framer-motion';
 import type { RectReadOnly } from 'react-use-measure';
 import { journey } from '~/data/journey';
 import PlaneIcon from '~/icons/Plane';
+import { Link } from '@remix-run/react';
 
 type TransportType = {
   type: string;
   amount?: number;
 };
+
+const MotionLink = motion(Link);
 
 function TransportIconContainer({ transports }: { transports: TransportType[] }) {
   const top = 112 + transports.length * 30;
@@ -88,8 +91,8 @@ function TripVisit({ visit, date, lastVisit }: { visit: (typeof journey)[0]; dat
     >
       {visit.transport && <TransportIconContainer transports={visit.transport} />}
       {visit.link ? (
-        <motion.a
-          href={visit.link}
+        <MotionLink
+          to={visit.link}
           className={`absolute left-[-22px] top-0 h-10 w-10 rounded-full bg-[var(--index-link)] text-center text-xs leading-10 text-[#e0e0e0]`}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
@@ -99,7 +102,7 @@ function TripVisit({ visit, date, lastVisit }: { visit: (typeof journey)[0]; dat
           aria-label={format(date, 'MMMM d, yyyy')}
         >
           {format(date, 'M/d')}
-        </motion.a>
+        </MotionLink>
       ) : (
         <span
           className={`absolute left-[-22px] top-0 h-10 w-10 rounded-full bg-[#282B27] text-center text-xs leading-10 text-[#e0e0e0]`}
@@ -110,8 +113,8 @@ function TripVisit({ visit, date, lastVisit }: { visit: (typeof journey)[0]; dat
       )}
       <div className="pl-10">
         {visit.link ? (
-          <motion.a
-            href={visit.link}
+          <MotionLink
+            to={visit.link}
             className="text-base font-semibold leading-10 text-[var(--index-link)]"
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
@@ -120,7 +123,7 @@ function TripVisit({ visit, date, lastVisit }: { visit: (typeof journey)[0]; dat
             }}
           >
             {visit.name}
-          </motion.a>
+          </MotionLink>
         ) : (
           <p className="text-base font-semibold leading-10">{visit.name}</p>
         )}
