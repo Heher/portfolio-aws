@@ -1,4 +1,3 @@
-import flags from '~/data/countryFlags.json';
 import { format, isSameYear } from 'date-fns';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import CarIcon from '~/icons/Car';
@@ -75,7 +74,6 @@ function TransportIcon({ transport }: { transport: TransportType }) {
 
 function TripVisit({ visit, date, lastVisit }: { visit: (typeof journey)[0]; date: Date; lastVisit?: boolean }) {
   const [hover, setHover] = useState(false);
-  const flag = flags.countries.find((flag) => flag?.name === visit.country);
 
   // pb-32 = 128px
   // pb-40 = 160px
@@ -128,13 +126,11 @@ function TripVisit({ visit, date, lastVisit }: { visit: (typeof journey)[0]; dat
           <p className="text-base font-semibold leading-10">{visit.name}</p>
         )}
         <div className="mt-1 flex items-center">
-          {flag?.flagByTimestamp && (
-            <img
-              className="mr-3 h-4 w-auto shadow-[1px_1px_4px_rgba(80,80,80,0.5)]"
-              src={flag.flagByTimestamp.png}
-              alt={`Flag of ${flag.name}`}
-            />
-          )}
+          <img
+            className="mr-3 h-4 w-auto shadow-[1px_1px_4px_rgba(80,80,80,0.5)]"
+            src={`/flags/${visit.flagSlug}.png`}
+            alt={`Flag of ${visit.country}`}
+          />
           <span className="text-sm font-semibold">{visit.country}</span>
         </div>
       </div>
