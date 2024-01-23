@@ -1,5 +1,5 @@
 import type { MetaFunction } from '@remix-run/node';
-import { useLocation } from '@remix-run/react';
+import { Link, useLocation } from '@remix-run/react';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import type { RectReadOnly } from 'react-use-measure';
@@ -145,8 +145,8 @@ function IndexContent({ size }: { size: RectReadOnly }) {
           </SocialLink>
         </div>
         <div className="mt-20 grid justify-items-start">
-          <a
-            href="/trip"
+          <Link
+            to="/trip"
             className="grid grid-cols-[1fr_40px] items-center"
             onMouseEnter={() => setTravelLinkHovered(true)}
             onMouseLeave={() => setTravelLinkHovered(false)}
@@ -166,7 +166,7 @@ function IndexContent({ size }: { size: RectReadOnly }) {
                 fill: travelLinkHovered ? 'var(--index-link-hover)' : 'var(--index-link)'
               }}
             />
-          </a>
+          </Link>
         </div>
       </motion.div>
       {contentSize?.height > 0 && (
