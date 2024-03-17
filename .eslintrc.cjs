@@ -7,6 +7,13 @@ module.exports = {
     'plugin:tailwindcss/recommended'
   ],
   parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true
+    },
+    ecmaVersion: 12,
+    sourceType: 'module'
+  },
   rules: {
     'tailwindcss/no-custom-classname': 'off'
   }
