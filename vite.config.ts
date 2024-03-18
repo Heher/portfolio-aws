@@ -9,7 +9,11 @@ installGlobals();
 export default defineConfig({
   // plugins: [remixDevTools(), remix(), tsconfigPaths()]
   server: {
+    // host: '127.0.0.1',
     port: 3000
+    // hmr: {
+    //   clientPort: 443
+    // }
   },
   plugins: [remix({ serverModuleFormat: 'esm', ignoredRouteFiles: ['**/.*'] }), tsconfigPaths()],
   optimizeDeps: { esbuildOptions: { target: 'esnext' } },

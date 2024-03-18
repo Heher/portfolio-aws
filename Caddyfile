@@ -7,5 +7,5 @@ heherapi.dev {
 johnheher.dev {
 	tls cert.pem key.pem
 
-	reverse_proxy 127.0.0.1:5173
+	reverse_proxy 127.0.0.1:3000
 }

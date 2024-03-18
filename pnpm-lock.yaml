@@ -17,6 +17,9 @@ dependencies:
   '@react-three/xr':
     specifier: ^5.7.1
     version: 5.7.1(@react-three/fiber@8.15.12)(react@18.2.0)(three@0.159.0)
+  '@remix-run/express':
+    specifier: ^2.8.1
+    version: 2.8.1(express@4.18.2)(typescript@5.3.3)
   '@remix-run/node':
     specifier: ^2.7.2
     version: 2.8.1(typescript@5.3.3)
