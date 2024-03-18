@@ -77,6 +77,8 @@ for (let i = 0; i < pointAmount; i++) {
 
 const globeGeometry = mergeGeometries(geometries);
 
+console.log('globeGeometry', globeGeometry);
+
 function beforeCompile(shader: THREE.Shader, uniforms: UniformType, eTexture: THREE.Texture) {
   shader.uniforms.maxSize = uniforms.maxSize;
   shader.uniforms.minSize = uniforms.minSize;

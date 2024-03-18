@@ -1,6 +1,9 @@
+import { wrapExpressCreateRequestHandler } from '@sentry/remix';
 import { createRequestHandler } from '@remix-run/express';
 import { installGlobals } from '@remix-run/node';
 import express from 'express';
+
+const sentryCreateRequestHandler = wrapExpressCreateRequestHandler(createRequestHandler);
 
 installGlobals();
 
@@ -26,7 +29,7 @@ app.use(express.static('build/client', { maxAge: '1h' }));
 // handle SSR requests
 app.all(
   '*',
-  createRequestHandler({
+  sentryCreateRequestHandler({
     build: viteDevServer
       ? () => viteDevServer.ssrLoadModule('virtual:remix/server-build')
       : await import('./build/server/index.js')
