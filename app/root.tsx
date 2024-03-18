@@ -1,4 +1,5 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/react';
+import { captureRemixErrorBoundaryError } from '@sentry/remix';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration, useRouteError } from '@remix-run/react';
 import globalStyles from '~/styles/global.css?url';
 import tailwindStyles from '~/styles/tailwind.css?url';
 
@@ -12,6 +13,12 @@ export function links() {
     }
   ];
 }
+
+export const ErrorBoundary = () => {
+  const error = useRouteError();
+  captureRemixErrorBoundaryError(error);
+  return <div>Something went wrong</div>;
+};
 
 export default function App() {
   return (

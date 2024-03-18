@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { vitePlugin as remix } from '@remix-run/dev';
 import { installGlobals } from '@remix-run/node';
 import { defineConfig } from 'vite';
@@ -15,12 +16,21 @@ export default defineConfig({
     //   clientPort: 443
     // }
   },
-  plugins: [remix({ serverModuleFormat: 'esm', ignoredRouteFiles: ['**/.*'] }), tsconfigPaths()],
+  plugins: [
+    remix({ serverModuleFormat: 'esm', ignoredRouteFiles: ['**/.*'] }),
+    tsconfigPaths(),
+    sentryVitePlugin({
+      org: "heher",
+      project: "john-heher"
+    })
+  ],
   optimizeDeps: { esbuildOptions: { target: 'esnext' } },
   build: {
-    target: 'ES2022'
     // rollupOptions: {
     //   external: ['@sentry/browser']
     // }
+    target: 'ES2022',
+
+    sourcemap: true
   }
 });
