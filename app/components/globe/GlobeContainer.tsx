@@ -1,6 +1,6 @@
 import { Globe } from './Globe';
 import { white } from './colors';
-import { useContext } from 'react';
+import { Suspense, useContext } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { TripPageContext } from '~/routes/trip';
 import { isRouteErrorResponse, useRouteError } from '@remix-run/react';

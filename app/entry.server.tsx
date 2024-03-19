@@ -19,6 +19,7 @@ export function handleError(error, { request }) {
 
 Sentry.init({
   dsn: 'https://3546d2dfae964405a7a1211e6b147388@o918579.ingest.us.sentry.io/5861922',
+  tunnel: '/sentry-tunnel',
   tracesSampleRate: 1
 });
 

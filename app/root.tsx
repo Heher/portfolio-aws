@@ -16,6 +16,7 @@ export function links() {
 
 export const ErrorBoundary = () => {
   const error = useRouteError();
+  console.error(error);
   captureRemixErrorBoundaryError(error);
   return <div>Something went wrong</div>;
 };
