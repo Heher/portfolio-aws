@@ -1,4 +1,3 @@
-import flags from '~/data/countryFlags.json';
 import { format, isSameYear } from 'date-fns';
 import { Fragment, useEffect, useRef, useState } from 'react';
 import CarIcon from '~/icons/Car';
@@ -10,11 +9,14 @@ import { motion } from 'framer-motion';
 import type { RectReadOnly } from 'react-use-measure';
 import { journey } from '~/data/journey';
 import PlaneIcon from '~/icons/Plane';
+import { Link } from '@remix-run/react';
 
 type TransportType = {
   type: string;
   amount?: number;
 };
+
+const MotionLink = motion(Link);
 
 function TransportIconContainer({ transports }: { transports: TransportType[] }) {
   const top = 112 + transports.length * 30;
@@ -72,7 +74,6 @@ function TransportIcon({ transport }: { transport: TransportType }) {
 
 function TripVisit({ visit, date, lastVisit }: { visit: (typeof journey)[0]; date: Date; lastVisit?: boolean }) {
   const [hover, setHover] = useState(false);
-  const flag = flags.countries.find((flag) => flag?.name === visit.country);
 
   // pb-32 = 128px
   // pb-40 = 160px
@@ -88,8 +89,8 @@ function TripVisit({ visit, date, lastVisit }: { visit: (typeof journey)[0]; dat
     >
       {visit.transport && <TransportIconContainer transports={visit.transport} />}
       {visit.link ? (
-        <motion.a
-          href={visit.link}
+        <MotionLink
+          to={visit.link}
           className={`absolute left-[-22px] top-0 h-10 w-10 rounded-full bg-[var(--index-link)] text-center text-xs leading-10 text-[#e0e0e0]`}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
@@ -99,7 +100,7 @@ function TripVisit({ visit, date, lastVisit }: { visit: (typeof journey)[0]; dat
           aria-label={format(date, 'MMMM d, yyyy')}
         >
           {format(date, 'M/d')}
-        </motion.a>
+        </MotionLink>
       ) : (
         <span
           className={`absolute left-[-22px] top-0 h-10 w-10 rounded-full bg-[#282B27] text-center text-xs leading-10 text-[#e0e0e0]`}
@@ -110,8 +111,8 @@ function TripVisit({ visit, date, lastVisit }: { visit: (typeof journey)[0]; dat
       )}
       <div className="pl-10">
         {visit.link ? (
-          <motion.a
-            href={visit.link}
+          <MotionLink
+            to={visit.link}
             className="text-base font-semibold leading-10 text-[var(--index-link)]"
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
@@ -120,18 +121,16 @@ function TripVisit({ visit, date, lastVisit }: { visit: (typeof journey)[0]; dat
             }}
           >
             {visit.name}
-          </motion.a>
+          </MotionLink>
         ) : (
           <p className="text-base font-semibold leading-10">{visit.name}</p>
         )}
         <div className="mt-1 flex items-center">
-          {flag?.flagByTimestamp && (
-            <img
-              className="mr-3 h-4 w-auto shadow-[1px_1px_4px_rgba(80,80,80,0.5)]"
-              src={flag.flagByTimestamp.png}
-              alt={`Flag of ${flag.name}`}
-            />
-          )}
+          <img
+            className="mr-3 h-4 w-auto shadow-[1px_1px_4px_rgba(80,80,80,0.5)]"
+            src={`/flags/${visit.flagSlug}.png`}
+            alt={`Flag of ${visit.country}`}
+          />
           <span className="text-sm font-semibold">{visit.country}</span>
         </div>
       </div>

@@ -1,5 +1,9 @@
-/// <reference types="@remix-run/dev" />
-/// <reference types="@remix-run/node" />
+/// <reference types="vite/client" />
+
+declare module '*.wgsl' {
+  const value: string;
+  export default value;
+}
 
 declare module '*.glsl' {
   const value: string;

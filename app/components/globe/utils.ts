@@ -1,8 +1,9 @@
-import * as THREE from 'three';
-import type { Coordinate, MarkerVisit, RouteInfo, Visit } from 'types/globe';
+// import * as THREE from 'three';
+import type { Coordinate, MarkerVisit, RouteInfo, Visit } from '~/types/globe';
 import type { CityType } from './coordinates';
 import type { Euler } from '@react-three/fiber';
 import { myRoute } from './routeCoordinates';
+import { Euler as ThreeEuler, Vector3 } from 'three';
 // import type { Euler, Vector3 } from '@react-three/fiber';
 
 export const globeRadius = 1;
@@ -23,7 +24,7 @@ export function convertToRadians(coord: Coordinate) {
 export function getPositionVector(coord: Coordinate, radius: number) {
   const { latRad, lonRad } = convertToRadians(coord);
 
-  return new THREE.Vector3(
+  return new Vector3(
     Math.cos(latRad) * Math.cos(lonRad) * radius,
     Math.sin(latRad) * radius,
     Math.cos(latRad) * Math.sin(lonRad) * radius
@@ -53,7 +54,7 @@ export function getPointPosition(coord: Coordinate, radius: number) {
 function getCoordRotation(coord: Coordinate): Euler {
   const { latRad, lonRad } = convertToRadians(coord);
 
-  return new THREE.Euler(0, -lonRad, latRad - Math.PI * 0.5);
+  return new ThreeEuler(0, -lonRad, latRad - Math.PI * 0.5);
 }
 
 export function placeObjectOnPlanet(

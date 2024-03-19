@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/remix';
 /**
  * By default, Remix will handle generating the HTTP Response for you.
  * You are free to delete this file if you'd like to, but if you ever want it revealed again, you can run `npx remix reveal` ✨
@@ -9,8 +10,18 @@ import { PassThrough } from 'node:stream';
 import type { AppLoadContext, EntryContext } from '@remix-run/node';
 import { createReadableStreamFromReadable } from '@remix-run/node';
 import { RemixServer } from '@remix-run/react';
-import isbot from 'isbot';
+import { isbot } from 'isbot';
 import { renderToPipeableStream } from 'react-dom/server';
+
+export function handleError(error, { request }) {
+  Sentry.captureRemixServerException(error, 'remix.server', request);
+}
+
+Sentry.init({
+  dsn: 'https://3546d2dfae964405a7a1211e6b147388@o918579.ingest.us.sentry.io/5861922',
+  tunnel: '/sentry-tunnel',
+  tracesSampleRate: 1
+});
 
 const ABORT_DELAY = 5_000;
 
@@ -19,9 +30,12 @@ export default function handleRequest(
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext,
+  // This is ignored so we can keep it in the template for visibility.  Feel
+  // free to delete this parameter in your app if you're not using it!
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   loadContext: AppLoadContext
 ) {
-  return isbot(request.headers.get('user-agent'))
+  return isbot(request.headers.get('user-agent') || '')
     ? handleBotRequest(request, responseStatusCode, responseHeaders, remixContext)
     : handleBrowserRequest(request, responseStatusCode, responseHeaders, remixContext);
 }
