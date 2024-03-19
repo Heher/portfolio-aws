@@ -38,12 +38,13 @@ export function Itenerary({ expand, setExpand, contentSize, size }: IteneraryPro
   return (
     <div className="relative w-full max-w-lg">
       <motion.button
-        className="absolute z-10 flex h-10 w-full max-w-lg items-center justify-center border-2 border-[#282B27] bg-[#282B27] text-center text-[#e0e0e0] transition-colors hover:bg-[#403a3b]"
+        className="z-10 flex h-10 w-full max-w-lg items-center justify-center border-2 border-[#282B27] bg-[#282B27] text-center text-[#e0e0e0] transition-colors hover:bg-[#403a3b]"
         onClick={handleItineraryClick}
         initial={{ width: '100%', top: 0, right: 0 }}
         animate={{
+          position: expand ? 'absolute' : 'relative',
           width: expand ? 40 : '100%',
-          top: expand ? getClosePosition(contentSize.height) : 0,
+          top: expand ? getClosePosition(contentSize?.height) : 0,
           right: expand ? getCloseRight(size.width) : 0,
           borderRadius: expand ? '50%' : 0
         }}
@@ -69,7 +70,9 @@ export function Itenerary({ expand, setExpand, contentSize, size }: IteneraryPro
       >
         <div className="h-16 w-full bg-gradient-to-b from-[rgba(176,178,178,0.7)] to-transparent"></div>
       </motion.div>
-      <FlagContainer expand={expand} contentSize={size} mainContentSize={contentSize} />
+      <div className="relative">
+        <FlagContainer expand={expand} contentSize={size} mainContentSize={contentSize} />
+      </div>
     </div>
   );
 }

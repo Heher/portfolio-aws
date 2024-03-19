@@ -10,6 +10,16 @@ import GitHubIcon from '~/icons/Github';
 import IndexArrow from '~/icons/IndexArrow';
 import LinkedInIcon from '~/icons/LinkedIn';
 import ResumeIcon from '~/icons/Resume';
+import GraphQLIcon from '~/icons/stack/GraphQl';
+import PostgraphileIcon from '~/icons/stack/Postgraphile';
+import PostgreSQLIcon from '~/icons/stack/PostgreSQL';
+import ReactIcon from '~/icons/stack/React';
+import RemixIcon from '~/icons/stack/Remix';
+import SSTIcon from '~/icons/stack/SST';
+import SentryIcon from '~/icons/stack/Sentry';
+import TailwindIcon from '~/icons/stack/Tailwind';
+import TypeScriptIcon from '~/icons/stack/TypeScript';
+import ViteIcon from '~/icons/stack/Vite';
 
 import * as gtag from '~/utils/gtags.client';
 
@@ -36,6 +46,20 @@ function SocialLink({ children, ...rest }: { children: React.ReactNode; [key: st
   );
 }
 
+function StackTech({ name, link, icon }: { name: string; link?: string }) {
+  return (
+    <li className="">
+      <a
+        href={link}
+        className="grid grid-cols-[30px_1fr] items-center gap-3 rounded-sm bg-[rgba(255,255,255,0.4)] py-4 pl-3 pr-5 text-[var(--index-link)] transition-colors hover:bg-[rgba(255,255,255,0.6)]"
+      >
+        {icon && icon}
+        {name}
+      </a>
+    </li>
+  );
+}
+
 function IndexContent({ size }: { size: RectReadOnly }) {
   const [expand, setExpand] = useState(false);
   const [travelLinkHovered, setTravelLinkHovered] = useState(false);
@@ -48,7 +72,9 @@ function IndexContent({ size }: { size: RectReadOnly }) {
 
   useEffect(() => {
     const root = document.documentElement;
+    const body = document.body;
     root.style.setProperty('--body-background', 'var(--index-background)');
+    body.style.setProperty('--body-background', 'var(--index-background)');
   }, []);
 
   useEffect(() => {
@@ -86,65 +112,139 @@ function IndexContent({ size }: { size: RectReadOnly }) {
         />
         <h1 className="mt-10 text-4xl font-semibold leading-none text-[#282B27]">John Heher</h1>
         <h2 className="mt-2 text-base uppercase text-[#50564E]">Web Developer</h2>
-        <div className="mt-10 grid grid-cols-1 grid-rows-4 justify-items-start gap-5">
-          <SocialLink
-            href="https://github.com/Heher"
-            aria-label="My GitHub"
-            onClick={() => {
-              gtag.event({
-                action: 'click_contact',
-                category: 'Contact Link',
-                label: 'GitHub'
-              });
-            }}
-          >
-            <GitHubIcon className={`h-6 fill-current`} />
-            <span className="text-xs">GitHub</span>
-          </SocialLink>
-          <SocialLink
-            href="https://www.linkedin.com/in/johnheher/"
-            aria-label="My LinkedIn"
-            onClick={() => {
-              gtag.event({
-                action: 'click_contact',
-                category: 'Contact Link',
-                label: 'LinkedIn'
-              });
-            }}
-          >
-            <LinkedInIcon className={`h-6 fill-current`} />
-            <span className="text-xs">LinkedIn</span>
-          </SocialLink>
-          <SocialLink
-            href="/cv.pdf"
-            aria-label="My Résumé"
-            onClick={() => {
-              gtag.event({
-                action: 'click_contact',
-                category: 'Contact Link',
-                label: 'Resume'
-              });
-            }}
-          >
-            <ResumeIcon className={`h-6 fill-current`} />
-            <span className="text-xs">Resume</span>
-          </SocialLink>
-          <SocialLink
-            href="mailto:johnheher@gmail.com"
-            aria-label="Email me"
-            onClick={() => {
-              gtag.event({
-                action: 'click_contact',
-                category: 'Contact Link',
-                label: 'Email'
-              });
-            }}
-          >
-            <EmailIcon className={`w-5 fill-current`} />
-            <span className="text-xs">Email</span>
-          </SocialLink>
+        <div className="mt-10 flex flex-col-reverse gap-5 md:flex-row">
+          <div className="mt-5 grid w-full grid-cols-1 grid-rows-4 justify-items-start gap-5 md:mt-0">
+            <SocialLink
+              href="https://github.com/Heher"
+              aria-label="My GitHub"
+              onClick={() => {
+                gtag.event({
+                  action: 'click_contact',
+                  category: 'Contact Link',
+                  label: 'GitHub'
+                });
+              }}
+            >
+              <GitHubIcon className={`h-6 fill-current`} />
+              <span className="text-xs">GitHub</span>
+            </SocialLink>
+            <SocialLink
+              href="https://www.linkedin.com/in/johnheher/"
+              aria-label="My LinkedIn"
+              onClick={() => {
+                gtag.event({
+                  action: 'click_contact',
+                  category: 'Contact Link',
+                  label: 'LinkedIn'
+                });
+              }}
+            >
+              <LinkedInIcon className={`h-6 fill-current`} />
+              <span className="text-xs">LinkedIn</span>
+            </SocialLink>
+            <SocialLink
+              href="/cv.pdf"
+              aria-label="My Résumé"
+              onClick={() => {
+                gtag.event({
+                  action: 'click_contact',
+                  category: 'Contact Link',
+                  label: 'Resume'
+                });
+              }}
+            >
+              <ResumeIcon className={`h-6 fill-current`} />
+              <span className="text-xs">Resume</span>
+            </SocialLink>
+            <SocialLink
+              href="mailto:johnheher@gmail.com"
+              aria-label="Email me"
+              onClick={() => {
+                gtag.event({
+                  action: 'click_contact',
+                  category: 'Contact Link',
+                  label: 'Email'
+                });
+              }}
+            >
+              <EmailIcon className={`w-5 fill-current`} />
+              <span className="text-xs">Email</span>
+            </SocialLink>
+          </div>
+          <div>
+            <p className="text-base text-[#282B27]">
+              Experienced and adaptable full-stack web developer with a front-end focus. I've worked on a variety of
+              projects from small start-ups to large agencies with{' '}
+              <span className="whitespace-nowrap">Fortune 500</span> clients.
+            </p>
+          </div>
         </div>
-        <div className="mt-20 grid justify-items-start">
+        <div className="mt-14">
+          <h2 className={`mb-5 text-lg font-semibold uppercase`}>Stack</h2>
+          <p className="max-w-md text-base text-[#282B27]">
+            Being a programmer for over a decade allows you to work with a variety of technologies, but lately my go-to
+            stack (and the one that built this site) has been:
+          </p>
+          <div className="mt-5 flex gap-5">
+            <div className="flex w-full justify-around">
+              <ul className="mt-5 flex flex-col gap-1 text-base text-[#282B27]">
+                <StackTech
+                  name="Remix"
+                  link="https://remix.run/"
+                  icon={<RemixIcon className="h-[20px] justify-self-center fill-current" />}
+                />
+                <StackTech
+                  name="React"
+                  link="https://react.dev/"
+                  icon={<ReactIcon className="h-[20px] justify-self-center fill-current" />}
+                />
+                <StackTech
+                  name="Tailwind"
+                  link="https://tailwindcss.com/"
+                  icon={<TailwindIcon className="h-[15px] justify-self-center fill-current" />}
+                />
+                <StackTech
+                  name="TypeScript"
+                  link="https://www.typescriptlang.org/"
+                  icon={<TypeScriptIcon className="h-[20px] justify-self-center fill-current" />}
+                />
+                <StackTech
+                  name="Vite"
+                  link="https://vitejs.dev/"
+                  icon={<ViteIcon className="h-[20px] justify-self-center fill-current" />}
+                />
+              </ul>
+              <ul className="mt-5 flex flex-col gap-1 text-base text-[#282B27]">
+                <StackTech
+                  name="SST"
+                  link="https://www.sst.dev/"
+                  icon={<SSTIcon className="h-[20px] justify-self-center fill-current" />}
+                />
+                <StackTech
+                  name="Sentry"
+                  link="https://www.sentry.io/"
+                  icon={<SentryIcon className="h-[20px] justify-self-center fill-current" />}
+                />
+                <StackTech
+                  name="Postgraphile"
+                  link="https://www.graphile.org/postgraphile/"
+                  icon={<PostgraphileIcon className="h-[20px] justify-self-center fill-current" />}
+                />
+                <StackTech
+                  name="GraphQL"
+                  link="https://graphql.org/"
+                  icon={<GraphQLIcon className="h-[20px] justify-self-center fill-current" />}
+                />
+                <StackTech
+                  name="PostgreSQL"
+                  link="https://www.postgresql.org/"
+                  icon={<PostgreSQLIcon className="h-[20px] justify-self-center fill-current" />}
+                />
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div className="mt-14 grid justify-items-start">
           <Link
             to="/trip"
             className="grid grid-cols-[1fr_40px] items-center"
@@ -169,9 +269,7 @@ function IndexContent({ size }: { size: RectReadOnly }) {
           </Link>
         </div>
       </motion.div>
-      {contentSize?.height > 0 && (
-        <Itenerary expand={expand} setExpand={setExpand} contentSize={contentSize} size={size} />
-      )}
+      <Itenerary expand={expand} setExpand={setExpand} contentSize={contentSize} size={size} />
     </motion.div>
   );
 }

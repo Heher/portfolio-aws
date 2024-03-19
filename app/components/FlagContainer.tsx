@@ -183,14 +183,15 @@ export default function FlagContainer({
       id="itenerary"
       aria-hidden={!expand}
       aria-label="List of all my travels."
-      className={`absolute left-0 max-w-lg ${
+      className={`left-0 max-w-lg ${
         expand ? 'overflow-scroll' : 'overflow-hidden'
       } max-h-[calc(100dvh-60px)] w-full max-w-2xl rounded-b-md border-2 border-[#282B27] bg-[var(--index-background)] pl-16 pt-6`}
       ref={ref}
       initial={{ height: 320, top: 0 }}
       animate={{
+        position: expand ? 'absolute' : 'relative',
         height: expand ? getListHeight(contentSize.height) : 320,
-        top: expand ? getExpandHeight(mainContentSize.height) : 0,
+        top: expand ? getExpandHeight(mainContentSize?.height) : 0,
         borderTopLeftRadius: expand ? '0.375rem' : '0',
         borderTopRightRadius: expand ? '0.375rem' : '0'
       }}
