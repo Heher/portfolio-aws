@@ -2,15 +2,17 @@ import type { MetaFunction } from '@remix-run/node';
 import { Outlet, useLocation, useOutletContext } from '@remix-run/react';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { Dispatch } from 'react';
-import { Suspense, createContext, useEffect, useReducer } from 'react';
+import { Suspense, createContext, useEffect, useReducer, lazy } from 'react';
 import useMeasure from 'react-use-measure';
-import { GlobeContainer } from '~/components/globe/GlobeContainer';
+// import { GlobeContainer } from '~/components/globe/GlobeContainer';
 import { ImageModal } from '~/components/modals/ImageModal';
 import CitySlider from '~/components/olympiad-city/CitySlider';
 
 import visits from '~/data/visits';
 import type { CityFieldsFragment } from '~/gql/graphql';
 import type { Visit } from '~/types/globe';
+
+const LazyGlobeContainer = lazy(() => import('~/components/globe/GlobeContainer').then(module => ({ default: module.GlobeContainer }));
 
 export const meta: MetaFunction = () => {
   return [
@@ -138,7 +140,7 @@ export default function TripPage() {
             <Suspense fallback={<GlobeFallback />}>
               <TripPageContext.Provider value={{ ...state, width, visits }}>
                 <TripPageDispatchContext.Provider value={dispatch}>
-                  <GlobeContainer />
+                  <LazyGlobeContainer />
                 </TripPageDispatchContext.Provider>
               </TripPageContext.Provider>
             </Suspense>
