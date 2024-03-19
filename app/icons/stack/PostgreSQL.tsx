@@ -1,12 +1,6 @@
 export default function PostgreSQLIcon({ className }: { className?: string }) {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="432.071pt"
-      height="445.383pt"
-      viewBox="0 0 432.071 445.383"
-      className={className}
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 432.071 445.383" className={className}>
       <g
         id="Layer_x0020_3"
         // style="fill-rule:nonzero;clip-rule:nonzero;fill:none;stroke:#FFFFFF;stroke-width:12.4651;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;"
