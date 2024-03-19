@@ -1,8 +1,6 @@
 export default function SSTIcon({ className }: { className?: string }) {
   return (
     <svg
-      width="256px"
-      height="197px"
       viewBox="0 0 256 197"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
