@@ -71,10 +71,10 @@ function IndexContent({ size }: { size: RectReadOnly }) {
   const [contentRef, contentSize] = useMeasure({ debounce: 300 });
 
   useEffect(() => {
-    const root = document.documentElement;
+    // const root = document.documentElement;
     const body = document.body;
-    root.style.setProperty('--body-background', 'var(--index-background)');
-    body.style.setProperty('--body-background', 'var(--index-background)');
+    // root.style.setProperty('--body-background', 'var(--index-background)');
+    body.style.setProperty('background', 'var(--index-background)');
   }, []);
 
   useEffect(() => {
