@@ -147,9 +147,9 @@ export default function TripIndex() {
   const { loaded } = appState;
 
   useEffect(() => {
-    const root = document.documentElement;
+    const body = document.body;
 
-    root.style.setProperty('--body-background', 'var(--globe-background)');
+    body.style.setProperty('background', 'var(--globe-background)');
   }, [width]);
 
   useEffect(() => {

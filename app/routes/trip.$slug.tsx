@@ -62,8 +62,8 @@ function CityTest({
       dispatch({ type: 'SELECTED_CITY', selectedCity: city.slug });
       dispatch({ type: 'SELECTED_CITY_DATA', selectedCityData: city });
 
-      const root = document.documentElement;
-      root.style.setProperty('--body-background', 'var(--globe-background)');
+      const body = document.body;
+      body.style.setProperty('background', 'var(--globe-background)');
     }
   }, [dispatch, city]);
 
