@@ -12,7 +12,9 @@ import visits from '~/data/visits';
 import type { CityFieldsFragment } from '~/gql/graphql';
 import type { Visit } from '~/types/globe';
 
-const LazyGlobeContainer = lazy(() => import('~/components/globe/GlobeContainer').then(module => ({ default: module.GlobeContainer })));
+const LazyGlobeContainer = lazy(() =>
+  import('~/components/globe/GlobeContainer').then((module) => ({ default: module.GlobeContainer }))
+);
 
 export const meta: MetaFunction = () => {
   return [

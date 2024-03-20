@@ -52,8 +52,8 @@ function RoutePage() {
     dispatch({ type: 'SELECTED_CITY', selectedCity: null });
     dispatch({ type: 'SELECTED_CITY_DATA', selectedCityData: null });
 
-    const root = document.documentElement;
-    root.style.setProperty('--body-background', 'var(--globe-background)');
+    const body = document.body;
+    body.style.setProperty('background', 'var(--globe-background)');
   }, [dispatch]);
 
   const loaderData = useLoaderData<typeof loader>() || {};
